@@ -5,6 +5,6 @@ $(function () {
     });
 
     socket.on('log', function (response) {
-        console.log("response", response);
+        $('pre').html(response);
     });
 });

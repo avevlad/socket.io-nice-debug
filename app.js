@@ -38,7 +38,15 @@ watcher.on('change', function (path) {
 });
 
 var update = function (filePath) {
+    console.log('');
+    console.log('.............................');
+    console.log('');
     var data = fs.readFileSync(filePath);
     data = data.toString();
-    socketGlobal.emit('log', data);
+    var reversData = "";
+    data.split('\n').reverse().map(function (line) {
+        reversData += line + '\n';
+    });
+    console.log("reversData", reversData);
+    socketGlobal.emit('log', reversData);
 };
