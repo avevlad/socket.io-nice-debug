@@ -6,7 +6,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 1337;
 var socketGlobal = false;
-var logFile = process.env.PATH || __dirname + '\\log.txt';
+var logFile = process.env.LOG_PATH || __dirname + '\\log.txt';
 console.log('');
 console.log('');
 console.log('');
