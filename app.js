@@ -1,10 +1,17 @@
 var chokidar = require('chokidar');
 var express = require('express');
+var fs = require('fs');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var port = process.env.PORT || 1337;
-var socketGlobal = undefined;
+var socketGlobal = false;
+var logFile = __dirname + '\\log.txt';
+console.log('');
+console.log('');
+console.log('');
+console.log('');
+console.log('');
 server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
@@ -14,12 +21,24 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', function (socket) {
     console.log("socket.id", socket.id);
     socketGlobal = socket;
+    update(logFile);
 });
 
-var watcher = chokidar.watch('./log.txt', {
+
+console.log("logFile", logFile);
+
+var watcher = chokidar.watch(logFile, {
     ignored: /[\/\\]\./, persistent: true
 });
 watcher.on('change', function (path) {
-    console.log(socketGlobal.id);
-    console.log("path", path);
+    if (!socketGlobal) {
+        return;
+    }
+    update(path);
 });
+
+var update = function (filePath) {
+    var data = fs.readFileSync(filePath);
+    data = data.toString();
+    socketGlobal.emit('log', data);
+};
