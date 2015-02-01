@@ -1,4 +1,3 @@
-var chokidar = require('chokidar');
 var express = require('express');
 var fs = require('fs');
 var app = express();
@@ -42,4 +41,4 @@ var update = function (filePath) {
 
 setInterval(function () {
     update(logFile);
-}, 500);
+}, 1000);
