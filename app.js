@@ -40,6 +40,6 @@ var update = function (filePath) {
     socketGlobal.emit('log', reversData);
 };
 
-setTimeout(function () {
+setInterval(function () {
     update(logFile);
 }, 500);
