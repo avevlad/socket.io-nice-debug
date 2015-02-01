@@ -35,8 +35,7 @@ io.on('connection', function (socket) {
     socketGlobal = socket;
     //update(logFile);
 });
-
-console.log("logFile", logFile);
+var log = console.log.bind(console);
 
 var watcher = chokidar.watch(logFile, {
     ignored: /[\/\\]\./, persistent: true
