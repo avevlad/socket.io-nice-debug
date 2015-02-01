@@ -31,6 +31,7 @@ var watcher = chokidar.watch(logFile, {
     ignored: /[\/\\]\./, persistent: true
 });
 watcher.on('change', function (path) {
+    console.log("change path", path);
     if (!socketGlobal) {
         return;
     }
@@ -47,6 +48,5 @@ var update = function (filePath) {
     data.split('\n').reverse().map(function (line) {
         reversData += line + '\n';
     });
-    console.log("reversData", reversData);
     socketGlobal.emit('log', reversData);
 };
