@@ -38,6 +38,9 @@ var update = function (filePath) {
         if (line.indexOf("clientIpAddress") == 0) {
             line = "<div style='color: #008800;'>" + line + "</div>";
         }
+        if (line.indexOf("io:socket emitting event") == 0) {
+            line = "<div style='font-weight: bold;'>" + line + "</div>";
+        }
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);
