@@ -33,8 +33,11 @@ var update = function (filePath) {
     var data = fs.readFileSync(filePath);
     data = data.toString();
     var reversData = "";
-    var reversArr = data.split('\n').reverse().splice(0, 150);
+    var reversArr = data.split('\n').reverse().splice(0, 200);
     reversArr.map(function (line) {
+        if (line.indexOf("clientIpAddress") == 0) {
+            line = "<div style='color: #008800;'>" + line + "</div>";
+        }
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);
