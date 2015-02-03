@@ -44,8 +44,11 @@ var update = function (filePath) {
         if (line.indexOf("disconnect: username") > -1) {
             line = "<div style='color: #ff0304;font-weight: bold;'>" + line + "</div>";
         }
-        if (line.indexOf("Clients currently") > -1) {
-            line = "<div style='color: #23beff;font-weight: bold;'>" + line + "</div>";
+        if (line.indexOf("client #") > -1) {
+            line = "<div style='color: #2143ff;font-weight: bolder;'>" + line + "</div>";
+        }
+        if (line.indexOf("clients not found") > -1) {
+            line = "<div style='color: #2143ff;font-weight: bolder;'>" + line + "</div>";
         }
         reversData += line + '\n';
     });
