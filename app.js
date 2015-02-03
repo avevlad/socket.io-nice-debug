@@ -33,7 +33,8 @@ var update = function (filePath) {
     var data = fs.readFileSync(filePath);
     data = data.toString();
     var reversData = "";
-    data.split('\n').reverse().map(function (line) {
+    var reversArr = data.split('\n').reverse().splice(0, 150);
+    reversArr.map(function (line) {
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);
