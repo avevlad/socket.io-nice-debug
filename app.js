@@ -35,10 +35,10 @@ var update = function (filePath) {
     var reversData = "";
     var reversArr = data.split('\n').reverse().splice(0, 300);
     reversArr.map(function (line) {
-        if (line.indexOf("clientIpAddress") == 0) {
+        if (line.indexOf("clientIpAddress") > -1) {
             line = "<div style='color: #008800;'>" + line + "</div>";
         }
-        if (line.indexOf("io:socket emitting event") == 0) {
+        if (line.indexOf("io:socket emitting event") > -1) {
             line = "<div style='font-weight: bold;'>" + line + "</div>";
         }
         reversData += line + '\n';
