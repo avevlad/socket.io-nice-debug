@@ -44,6 +44,9 @@ var update = function (filePath) {
         if (line.indexOf("disconnect: username") > -1) {
             line = "<div style='color: #ff0304;font-weight: bold;'>" + line + "</div>";
         }
+        if (line.indexOf("Clients currently") > -1) {
+            line = "<div style='color: #23beff;font-weight: bold;'>" + line + "</div>";
+        }
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);
