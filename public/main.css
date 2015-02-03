@@ -2,7 +2,7 @@ body {
     padding: 10px;
 }
 
-.json-format {
+.json-format, .string-format {
     background-color: ghostwhite;
     border: 1px solid silver;
     padding: 10px 20px;
@@ -18,4 +18,10 @@ body {
 
 .json-string {
     color: olive;
+}
+
+.emittingEventName {
+    font-weight: bold;
+    font-size: 17px;
+    color: #000000;
 }

@@ -59,7 +59,9 @@ var sendData = function (newSocket, callback) {
         }
         else if (line.indexOf("socket.io:socket emitting event") > -1) {
             var oldLine = line;
-            line = "<div style='font-weight: bold;font-size: 14px;color: #000000;'>" + escapeHtml(line) + "</div>";
+            var name = line;
+            name = name.match(/event\s\["\w+/)[0].substring(8).trim();
+            line = "<div class='emittingEventName'>" + name + "</div>";
             var splitLine = oldLine.split("\",{");
             var appendToLine = "";
             if (splitLine[1]) {
