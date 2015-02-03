@@ -33,7 +33,7 @@ var update = function (filePath) {
     var data = fs.readFileSync(filePath);
     data = data.toString();
     var reversData = "";
-    var reversArr = data.split('\n').reverse().splice(0, 200);
+    var reversArr = data.split('\n').reverse().splice(0, 300);
     reversArr.map(function (line) {
         if (line.indexOf("clientIpAddress") == 0) {
             line = "<div style='color: #008800;'>" + line + "</div>";
