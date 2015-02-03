@@ -1,3 +1,21 @@
 body {
     padding: 10px;
 }
+
+.json-format {
+    background-color: ghostwhite;
+    border: 1px solid silver;
+    padding: 10px 20px;
+}
+
+.json-key {
+    color: brown;
+}
+
+.json-value {
+    color: navy;
+}
+
+.json-string {
+    color: olive;
+}

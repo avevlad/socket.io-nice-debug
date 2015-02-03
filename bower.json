@@ -1,0 +1,19 @@
+{
+  "name": "log-test",
+  "version": "0.0.0",
+  "homepage": "https://github.com/AveVlad/socket.io-nice-debug",
+  "authors": [
+    "AveVlad <dev@vld.me>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "json-formatter": "~0.2.7"
+  }
+}
