@@ -50,6 +50,9 @@ var update = function (filePath) {
         if (line.indexOf("clients not found") > -1) {
             line = "<div style='color: #2143ff;font-weight: bolder;'>" + line + "</div>";
         }
+        if (line.indexOf("Server listening") > -1) {
+            line = "<div style='color: #008800;font-weight: bold;font-size: 18px;'>" + line + "</div>";
+        }
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);
