@@ -17,12 +17,23 @@ server.listen(port, function () {
     console.log('Server listening at port %d', port);
 });
 
+function escapeHtml(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
     console.log("socket.id", socket.id);
     socketGlobal = socket;
-    sendData(true, function () {});
+    sendData(true, function () {
+    });
 });
 
 var sendData = function (newSocket, callback) {
@@ -46,27 +57,38 @@ var sendData = function (newSocket, callback) {
         if (line.indexOf("clientIpAddress") > -1) {
             line = "<div style='color: #008800;font-weight: bold;'>" + line + "</div>";
         }
-        if (line.indexOf("socket.io-parser decoded 2") > -1) {
+        else if (line.indexOf("socket.io:socket emitting event") > -1) {
             var oldLine = line;
-            var splitLine = line.split("as");
-            var jsonText = JSON.parse(splitLine[1].trim());
-            jsonText = JSON.stringify(jsonText, null, 4);
-            console.log(jsonText);
-            line = "<div style='font-weight: bold;font-size: 14px;color: #000000;'>" + splitLine[0] + "</div>";
-            line +="<div class='json-format'>" + jsonText + "</div>";
+            line = "<div style='font-weight: bold;font-size: 14px;color: #000000;'>" + escapeHtml(line) + "</div>";
+            var splitLine = oldLine.split("\",{");
+            var appendToLine = "";
+            if (splitLine[1]) {
+                var json = "{" + splitLine[1].trim();
+                json = json.substring(0, json.length - 1);
+                appendToLine = "<div class='json-format'>" + json + "</div>";
+                json = json.replace(/\s+/g, ' ');
+            } else {
+                var varString = oldLine.split('",')[1].trim();
+                varString = varString.substring(0, varString.length - 1);
+                appendToLine = "<div class='string-format'>" + varString + "</div>";
+            }
+            line += appendToLine;
         }
-        if (line.indexOf("disconnect: username") > -1) {
+        else if (line.indexOf("disconnect: username") > -1) {
             line = "<div style='color: #ff0304;font-weight: bold;'>" + line + "</div>";
         }
-        if (line.indexOf("client #") > -1) {
+        else if (line.indexOf("client #") > -1) {
             line = "<div style='color: #2143ff;font-weight: bolder;'>" + line + "</div>";
         }
-        if (line.indexOf("clients not found") > -1) {
+        else if (line.indexOf("clients not found") > -1) {
             line = "<div style='color: #2143ff;font-weight: bolder;'>" + line + "</div>";
         }
-        if (line.indexOf("Server listening") > -1) {
+        else if (line.indexOf("Server listening") > -1) {
             line = "<div style='color: #008800;font-weight: bold;font-size: 18px;'>" + line + "</div>";
+        } else {
+            line = escapeHtml(line);
         }
+
         reversData += line + '\n';
     });
     socketGlobal.emit('log', reversData);

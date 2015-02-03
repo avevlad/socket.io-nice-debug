@@ -1,0 +1,15 @@
+{
+  "type": "goPhotoScreen",
+  "data": {
+    "screenId": 2,
+    "html":"\n                <img src=\"/image/task1.png\">\n\n                <div class=\"task-content\">\n                    <br>\n                    text for quest #1\n</div>\n            "
+  },
+  "screenObj": {
+    "id": 1,
+    "photoScreenNum": 1,
+    "history": [
+      1,
+      2
+    ]
+  }
+}
