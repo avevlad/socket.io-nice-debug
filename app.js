@@ -49,7 +49,7 @@ var sendData = function (newSocket, callback) {
         if (line.indexOf("socket.io-parser decoded 2") > -1) {
             var oldLine = line;
             var splitLine = line.split("as");
-            var jsonText = JSON.parse(splitLine[1].trim());;
+            var jsonText = JSON.parse(splitLine[1].trim());
             jsonText = JSON.stringify(jsonText, null, 4);
             console.log(jsonText);
             line = "<div style='font-weight: bold;font-size: 14px;color: #000000;'>" + splitLine[0] + "</div>";
