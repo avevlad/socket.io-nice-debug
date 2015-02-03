@@ -36,10 +36,13 @@ var update = function (filePath) {
     var reversArr = data.split('\n').reverse().splice(0, 300);
     reversArr.map(function (line) {
         if (line.indexOf("clientIpAddress") > -1) {
-            line = "<div style='color: #008800;'>" + line + "</div>";
+            line = "<div style='color: #008800;font-weight: bold;'>" + line + "</div>";
         }
-        if (line.indexOf("io:socket emitting event") > -1) {
-            line = "<div style='font-weight: bold;'>" + line + "</div>";
+        if (line.indexOf("socket.io-parser decoded 2") > -1) {
+            line = "<div style='font-weight: bold;font-size: 14px;color: #000000;'>" + line + "</div>";
+        }
+        if (line.indexOf("disconnect: username") > -1) {
+            line = "<div style='color: #ff0304;font-weight: bold;'>" + line + "</div>";
         }
         reversData += line + '\n';
     });
