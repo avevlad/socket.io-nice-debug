@@ -58,6 +58,7 @@ var sendData = function (newSocket, callback) {
             line = "<div style='color: #008800;font-weight: bold;'>" + line + "</div>";
         }
         else if (line.indexOf("socket.io:socket emitting event") > -1) {
+            console.log(line, '--------------------------');
             var oldLine = line;
             var name = line;
             name = name.match(/event\s\["\w+/)[0].substring(8).trim();
