@@ -65,6 +65,9 @@ var sendData = function (newSocket, callback) {
             console.log(line, '--------------------------');
             var oldLine = line;
             var name = line;
+            if (!name.match(/event\s\["\w+/)) {
+                return;
+            }
             name = name.match(/event\s\["\w+/)[0].substring(8).trim();
             line = "<div class='emittingEventName'>" + name + "</div>";
             var splitLine = oldLine.split("\",{");
