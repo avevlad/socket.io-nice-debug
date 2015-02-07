@@ -52,7 +52,7 @@ var sendData = function (newSocket, callback) {
     }
     lastFileData = tempLine;
     var reversData = "";
-    var reversArr = data.split('\n').reverse().splice(0, 300);
+    var reversArr = data.split('\n').reverse().splice(0, 5000);
     reversArr.map(function (line) {
         if (line.indexOf("clientIpAddress") > -1) {
             line = "<div style='color: #008800;font-weight: bold;'>" + line + "</div>";
