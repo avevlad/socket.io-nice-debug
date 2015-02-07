@@ -70,9 +70,13 @@ var sendData = function (newSocket, callback) {
                 appendToLine = "<div class='json-format'>" + json + "</div>";
                 json = json.replace(/\s+/g, ' ');
             } else {
-                var varString = oldLine.split('",')[1].trim();
-                varString = varString.substring(0, varString.length - 1);
-                appendToLine = "<div class='string-format'>" + varString + "</div>";
+                var varString = oldLine.split('",')[1];
+                if (varString) {
+                    varString = varString.substring(0, varString.length - 1);
+                    appendToLine = "<div class='string-format'>" + varString + "</div>";
+                } else {
+                    appendToLine = "<div class='string-format'>" + oldLine + " // TODO: fix line</div>";
+                }
             }
             line += appendToLine;
         }
