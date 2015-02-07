@@ -3,7 +3,8 @@ var fs = require('fs');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-var port = process.env.PORT || 1337;
+var auth = require('./auth');
+var port = process.env.PORT || 8899;
 var socketGlobal = false;
 var logFile = process.env.LOG_PATH || __dirname + '\\log.txt';
 var lastFileData = "";
@@ -25,6 +26,9 @@ function escapeHtml(text) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
+app.use(auth, function (req, res, next) {
+    next();
+});
 
 
 app.use(express.static(__dirname + '/public'));
